@@ -1,0 +1,130 @@
+﻿@using core.application.contract.api.DTO.Payment;
+
+@{
+    ViewData["Title"] = "EnjoyLife";
+    @model PaymentZarinVerifyResponseDTO    
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EnjoyLife</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="https://app.enjoylife.ir/favicon.ico">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://app.enjoylife.ir/assets/style/css/root.css">
+    <link rel="stylesheet" href="https://app.enjoylife.ir/assets/template/css/bootstrap.css">
+    <link rel="stylesheet" href="https://app.enjoylife.ir/assets/style/css/main.css">
+    <link rel="stylesheet" href="https://app.enjoylife.ir/assets/template/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@500&display=swap" rel="stylesheet"> 
+
+    <style>   
+        *,h1, h2, h3, h4, h5, h6 {
+            font-family: "IBM Plex Sans Arabic" !important;
+        } 
+
+        .result-img {
+            max-width: 110px;
+        }
+        .a-r{
+            text-align:right;
+            padding-right: 8px;
+        }
+
+        .row {
+            margin-bottom: 0px !important;
+        }
+    </style>
+    <script>
+        function formatCurrency(number) {
+            return number.toLocaleString('en-US');
+        }
+
+        window.onload = function () {           
+            const element = document.getElementById('cur');
+
+            if (element) {
+                const originalNumberText = element.innerText;
+                const originalNumber = parseFloat(originalNumberText.replace(/,/g, ''));
+
+                if (!isNaN(originalNumber)) {
+                    const formattedNumber = formatCurrency(originalNumber);
+                    element.innerText = formattedNumber;                   
+                } 
+            } 
+        };
+    </script>
+</head>
+<body>      
+        <div class="d-flex flex-column justify-content-center min-vh-100 gradient-dark-l" dir="rtl">
+            <div class="card card-style text-center mt-3 scale-box-custom">
+                <div class="content py-2">
+                    <h2 class="color-green-dark">
+                    <img src="https://app.enjoylife.ir/assets/style/images/success.png" class="result-img" />
+                    </h2>
+                    <h1 class="mt-2">@Model.CreatedBy عزیز</h1>
+                    <p class="color-green-dark mb-4">
+ 
+                         تراکنش با موفقیت انجام شد 
+                        
+                    </p>
+                    <div class="divider"></div>
+                <div class="a-r">
+                    <div class="row">
+                        <div class="col-6"> <p class="a-r  m-0">مقدار پرداخت شده :</p></div>
+                         
+                        <div class="col-6">
+                            <span class="a-r" id="cur">@(Model.totalAmount * 10)</span>
+                                ریال                           
+                        </div>
+                    </div>
+                    </div>
+                   
+
+ 
+                  
+                    <div class="divider"></div>
+                <div class="a-r">
+
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="a-r  m-0">شماره پیگیری بانک :</p>
+                            
+                        </div>
+                        <div class="col-6"><span class="a-r ">@Model.RefID</span></div>
+                        </div>                    
+                    </div>
+
+                     
+                    
+                    <div class="divider"></div>
+                <div class="a-r">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="a-r  m-0">شناسه تراکنش :</p>
+
+                        </div>
+                        <div class="col-6"><span class="a-r ">@Model.PaymentId</span></div>
+                    </div>
+                    
+                </div>
+
+                   
+                        
+                    </div>
+                   
+                    <div class="pt-3 mb-4">
+                <a class="  back-button btn btn-m btn-center-l brand-yellow rounded-sm font-700 color-dark-dark" href="https://app.enjoylife.ir">
+                            بازگشت به خانه
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+</body>
+</html>
+ 
+

@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mika.Domain.Contracts.DTOs.Users
+{
+    public class Request_LoginDTO
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+}

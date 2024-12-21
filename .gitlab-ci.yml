@@ -1,0 +1,41 @@
+image: mcr.microsoft.com/dotnet/sdk:6.0
+
+stages:
+  - build
+  - test
+
+variables:
+  SOLUTION: EnjoyLife.sln
+  CORE: src/core/core.api/core.api.csproj
+  MESSAGE: src/MessagingService/Messaging.API/Messaging.API.csproj
+  NEWS: src/news/news.api/news.api.csproj
+  Identity: src/IdentityProviderService/IdentityProvider.API/IdentityProvider.API.csproj
+  fileserver: src/FileStorageService/FileStorage.API/FileStorage.API.csproj
+  orgchart: src/OrganizationChartService/OrganizationChart.API/OrganizationChart.API.csproj
+
+build:
+  stage: build
+  script:
+    - dotnet restore $SOLUTION
+    - dotnet build $SOLUTION --no-restore
+
+test:
+  stage: test
+  parallel: 4
+  script:
+    - dotnet test $CORE --no-build --verbosity normal
+    - dotnet test $MESSAGE --no-build --verbosity normal
+    - dotnet test $NEWS --no-build --verbosity normal
+    - dotnet test $Identity --no-build --verbosity normal
+    - dotnet test $orgchart --no-build --verbosity normal
+    - dotnet test $fileserver --no-build --verbosity normal
+# release:
+#   stage: release
+#   script:
+#     - dotnet test $CORE --no-build --verbosity normal
+#     - dotnet test $MESSAGE --no-build --verbosity normal
+#     - dotnet test $NEWS --no-build --verbosity normal
+#     - dotnet publish -c Development -o ../release/core $CORE
+#     - dotnet publish -c Development -o ../release/message $MESSAGE
+#     - dotnet publish -c Development -o ../release/news $NEWS
+
